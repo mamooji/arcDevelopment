@@ -6,6 +6,10 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import ButtonArrow from "./ui/ButtonArrow";
 import Typography from "@material-ui/core/Typography";
+import customSoftwareIcon from "../assets/Custom Software Icon.svg";
+import mobileAppsIcon from "../assets/mobileIcon.svg";
+import websitesIcon from "../assets/websiteIcon.svg";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 const useStyles = makeStyles((theme) => ({
   animation: {
     maxWidth: "50em",
@@ -28,16 +32,19 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   learnButtonHero: {
-    borderColor: theme.palette.common.blue,
-    color: theme.palette.common.blue,
-    borderWidth: 2,
-    textTransform: "none",
-    borderRadius: 50,
-    fontFamily: "Roboto",
-    fontWeight: "bold",
+    ...theme.typography.learnButton,
     fontSize: "0.9rem",
     height: 45,
     width: 145,
+  },
+  learnButton: {
+    ...theme.typography.learnButton,
+    fontSize: "0.7rem",
+    height: 35,
+    padding: 5,
+    [theme.breakpoints.down("sm")]: {
+      marginBottom: "2em",
+    },
   },
   buttonContainer: {
     marginTop: "1em",
@@ -58,10 +65,30 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: 0,
     },
   },
+  specialText: {
+    fontFamily: "Pacifico",
+    color: theme.palette.common.orange,
+  },
+  subtitle: {
+    marginBottom: "1em",
+  },
+  icon: {
+    marginLeft: "2em",
+    [theme.breakpoints.down("xs")]: {
+      marginLeft: 0,
+    },
+  },
+  serviceContainer: {
+    marginTop: "12em",
+    [theme.breakpoints.down("sm")]: {
+      padding: 25,
+    },
+  },
 }));
 const LandingPage = (props) => {
   const classes = useStyles();
   const theme = useTheme();
+  const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
 
   const defaultOptions = {
     loop: true,
@@ -73,6 +100,7 @@ const LandingPage = (props) => {
   };
   return (
     <Grid container direction="column" className={classes.mainContainer}>
+      {/*--------{Hero Block}------- */}
       <Grid item>
         <Grid container justify="flex-end" alignItems="center" direction="row">
           <Grid sm item className={classes.heroTextContainer}>
@@ -105,6 +133,137 @@ const LandingPage = (props) => {
           </Grid>
           <Grid sm item className={classes.animation}>
             <Lottie options={defaultOptions} height={"100%"} width={"100%"} />
+          </Grid>
+        </Grid>
+      </Grid>
+      {/*--------{Services Block}------- */}
+      <Grid item>
+        {" "}
+        <Grid
+          container
+          direction="row"
+          justify={matchesSM ? "center" : undefined}
+          className={classes.serviceContainer}
+        >
+          <Grid
+            item
+            style={{
+              marginLeft: matchesSM ? 0 : "5em",
+              textAlign: matchesSM ? "center" : undefined,
+            }}
+          >
+            <Typography variant="h4">Custom Software Development</Typography>
+            <Typography variant="subtitle1" className={classes.subtitle}>
+              Save Energy. Save Time. Save Money.
+            </Typography>
+            <Typography variant="subtitle1">
+              Complete Digital Solutions, from investigation to{" "}
+              <span className={classes.specialText}>celebration.</span>
+            </Typography>
+            <Button variant="outlined" className={classes.learnButton}>
+              <span style={{ marginRight: 10 }}>Learn More</span>
+              <ButtonArrow
+                width={10}
+                height={10}
+                fill={theme.palette.common.blue}
+              />
+            </Button>
+          </Grid>
+          <Grid item>
+            <img
+              alt="custom software icon"
+              className={classes.icon}
+              src={customSoftwareIcon}
+            />
+          </Grid>
+        </Grid>
+      </Grid>
+
+      {/*--------{Mobile Block}------- */}
+      <Grid item>
+        {" "}
+        <Grid
+          container
+          direction="row"
+          justify={matchesSM ? "center" : "flex-end"}
+          className={classes.serviceContainer}
+        >
+          <Grid
+            item
+            style={{
+              textAlign: matchesSM ? "center" : undefined,
+            }}
+          >
+            <Typography variant="h4">Mobile App Development</Typography>
+            <Typography variant="subtitle1" className={classes.subtitle}>
+              Extend Functionality. Extend Access. Increase Engagement.
+            </Typography>
+            <Typography variant="subtitle1">
+              Integrate your web experinece or create standalone app
+              {matchesSM ? null : <br />} with either mobile platform.
+            </Typography>
+            <Button variant="outlined" className={classes.learnButton}>
+              <span style={{ marginRight: 10 }}>Learn More</span>
+              <ButtonArrow
+                width={10}
+                height={10}
+                fill={theme.palette.common.blue}
+              />
+            </Button>
+          </Grid>
+          <Grid
+            item
+            style={{
+              marginRight: matchesSM ? 0 : "5em",
+            }}
+          >
+            <img
+              alt="Mobile icon"
+              className={classes.icon}
+              src={mobileAppsIcon}
+            />
+          </Grid>
+        </Grid>
+      </Grid>
+
+      {/*--------{Websites Block}------- */}
+      <Grid item>
+        {" "}
+        <Grid
+          container
+          direction="row"
+          justify={matchesSM ? "center" : undefined}
+          className={classes.serviceContainer}
+        >
+          <Grid
+            item
+            style={{
+              marginLeft: matchesSM ? 0 : "5em",
+              textAlign: matchesSM ? "center" : undefined,
+            }}
+          >
+            <Typography variant="h4">Website Development</Typography>
+            <Typography variant="subtitle1" className={classes.subtitle}>
+              Reach More. Discover More. Sell More.
+            </Typography>
+            <Typography variant="subtitle1">
+              Optimized for search engines, built for speed
+            </Typography>
+            <Button variant="outlined" className={classes.learnButton}>
+              <span style={{ marginRight: 10 }}>Learn More</span>
+              <ButtonArrow
+                width={10}
+                height={10}
+                fill={theme.palette.common.blue}
+              />
+            </Button>
+          </Grid>
+          <Grid item>
+            <img
+              alt="Websites icon"
+              className={classes.icon}
+              src={websitesIcon}
+            />
           </Grid>
         </Grid>
       </Grid>
